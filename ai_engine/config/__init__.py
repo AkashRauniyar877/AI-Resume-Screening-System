@@ -1,0 +1,17 @@
+"""Configuration package initialization."""
+
+from .ai_config import (
+    DEFAULT_SKILLS,
+    EDUCATION_PATTERNS,
+    DEFAULT_SCORING_WEIGHTS,
+    SEMANTIC_MODEL_NAME,
+    SUPPORTED_EXTENSIONS,
+)
+
+__all__ = [
+    "DEFAULT_SKILLS",
+    "EDUCATION_PATTERNS",
+    "DEFAULT_SCORING_WEIGHTS",
+    "SEMANTIC_MODEL_NAME",
+    "SUPPORTED_EXTENSIONS",
+]

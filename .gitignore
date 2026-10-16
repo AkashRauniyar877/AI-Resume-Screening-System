@@ -1,0 +1,32 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Data / datasets
+data/resumes/
+data/resume_ner/
+data/processed/
+
+# Generated files
+*.pkl
+*.joblib
+*.npy
+*.npz
+
+# Uploads
+backend/uploads/*
+!backend/uploads/resumes/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+frontend/node_modules/
+frontend/dist/

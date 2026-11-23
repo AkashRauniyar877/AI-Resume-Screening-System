@@ -19,4 +19,11 @@ JWT_SECRET_KEY: str = os.getenv(
     "JWT_SECRET_KEY", "c87d4a6f91e3b52d0a4c8e1f7b9a3d5c2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2b"
 )
 JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM", "HS256")
-JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
+
+# 0 or <= 0 indicates token never expires (valid for all time)
+raw_expire = os.getenv("JWT_ACCESS_TOKEN_EXPIRE_MINUTES", "0").strip()
+try:
+    parsed_expire = int(raw_expire)
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = parsed_expire if parsed_expire > 0 else 0
+except (ValueError, TypeError):
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES = 0

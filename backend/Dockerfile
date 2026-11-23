@@ -33,5 +33,5 @@ RUN mkdir -p /app/backend/uploads/resumes
 
 EXPOSE 8000
 
-# Run FastAPI backend with Uvicorn server
-CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run FastAPI backend with Uvicorn server (evaluates $PORT if set by Render or cloud hosts, defaults to 8000)
+CMD ["sh", "-c", "uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

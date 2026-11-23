@@ -73,14 +73,15 @@ def create_access_token(
     """
     to_encode = data.copy()
 
-    if expires_delta:
+    if expires_delta is not None:
         expire = datetime.now(timezone.utc) + expires_delta
-    else:
+        to_encode.update({"exp": expire})
+    elif JWT_ACCESS_TOKEN_EXPIRE_MINUTES and JWT_ACCESS_TOKEN_EXPIRE_MINUTES > 0:
         expire = datetime.now(timezone.utc) + timedelta(
             minutes=JWT_ACCESS_TOKEN_EXPIRE_MINUTES
         )
-
-    to_encode.update({"exp": expire})
+        to_encode.update({"exp": expire})
+    # If JWT_ACCESS_TOKEN_EXPIRE_MINUTES <= 0, no exp claim is set, making the token permanent (valid for all time)
     encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, algorithm=JWT_ALGORITHM)
     return encoded_jwt
 
